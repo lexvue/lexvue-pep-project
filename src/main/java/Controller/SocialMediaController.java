@@ -36,6 +36,7 @@ public class SocialMediaController {
         ObjectMapper mapper = new ObjectMapper();
         Account acc = mapper.readValue(ctx.body(), Account.class);
         //Account addedAcc = 
+         
     }
 
 

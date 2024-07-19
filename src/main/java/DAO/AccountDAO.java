@@ -12,12 +12,27 @@ public class AccountDAO {
         Connection connection = ConnectionUtil.getConnection();
         List<Account> allAcc = new ArrayList<>();
 
-        String sql = "SELECT * FROM account";
+        try {
+            String sql = "SELECT * FROM account";
 
-        PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        ResultSet rs = preparedStatement.executeQuery();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet rs = preparedStatement.executeQuery();
 
+            while (rs.next()) {
+                Account acc = new Account(
+                    rs.getInt("account_id"),
+                    rs.getString("username"),
+                    rs.getString("password")
+                );
+                allAcc.add(acc);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
         return allAcc;
+    }
 
+    public Account registerAccount(Account acc) {
+        return null;
     }
 }
