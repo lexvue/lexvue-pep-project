@@ -1,13 +1,16 @@
 package Service;
 
 import Model.Account;
+
+import java.util.List;
+
 import DAO.AccountDAO;
 
 public class AccountService {
     AccountDAO accountDAO;
 
-    public AccountService(){
-        AccountDAO accountDAO = new AccountDAO();
+    public AccountService() {
+        accountDAO = new AccountDAO();
     }
 
     /**
@@ -37,9 +40,8 @@ public class AccountService {
      *         inform our provide the front-end client with information about the added Account.
      */
     public Account addAccount(Account Account){
-        //return accountDAO.insertAccount(Account);
+        return accountDAO.registerAccount(Account);
     }
-
     /**
      * TODO: Use the AccountDAO to update an existing Account from the database.
      * You should first check that the Account ID already exists. To do this, you could use an if statement that checks
@@ -53,9 +55,9 @@ public class AccountService {
      *         unsuccessful. We do this to inform our application about successful/unsuccessful operations. (eg, the
      *         user should have some insight if they attempted to edit a nonexistent Account.)
      */
-    public Account updateAccount(int Account_id, Account Account){
-        AccountDAO.updateAccount(Account_id, Account);
-        return AccountDAO.getAccountById(Account_id);
+    public Account updateAccount(int account_id, Account account){
+        accountDAO.updateAccount(account_id);
+        return accountDAO.getAccountByID(account_id);
     }
 
     /**
@@ -65,18 +67,15 @@ public class AccountService {
      * @return all Accounts in the database.
      */
     public List<Account> getAllAccounts() {
-        return AccountDAO.getAllAccounts();
+        return accountDAO.getAllAccounts();
     }
 
-    /**
-     * TODO: Use the AccountDAO to retrieve a List containing all Accounts departing from a certain city and arriving at
-     * some other city. You could use the AccountDAO.getAllAccountsFromCityToCity method.
-     *
-     * @param departure_city the departing city of the Account.
-     * @param arrival_city the arriving city of the Account.
-     * @return all Accounts departing from departure_city and arriving at arrival_city.
-     */
-    public List<Account> getAllAccountsFromCityToCity(String departure_city, String arrival_city) {
-        return AccountDAO.getAllAccountsFromCityToCity(departure_city, arrival_city);
+    public Account getAccountByID(int Account_id) {
+        return accountDAO.getAccountByID(Account_id);
     }
+
+    public Account getAccountByUsernameAndPassword(String Username, String Password) {
+        return accountDAO.getAccountByUsernameAndPassword(Username, Password);
+    }
+
 }
